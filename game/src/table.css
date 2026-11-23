@@ -1,0 +1,106 @@
+/* table.css — Emberfall Duel layout: screens, the duel table, heroes, log. */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; }
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+  background: #17101f; color: #f3e9d2; overflow: hidden;
+}
+#app { height: 100vh; display: flex; flex-direction: column; }
+button { font-family: inherit; cursor: pointer; }
+
+/* ---------- title & end screens ---------- */
+.screen {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 24px; position: relative;
+  background:
+    radial-gradient(ellipse 60% 42% at 50% 108%, rgba(255,110,50,.38), transparent 70%),
+    radial-gradient(ellipse 45% 35% at 18% -5%, rgba(94,200,255,.20), transparent 70%),
+    radial-gradient(ellipse 45% 35% at 84% -5%, rgba(201,154,255,.18), transparent 70%),
+    linear-gradient(180deg, #120c1e 0%, #1d1330 55%, #2a1410 100%);
+}
+.screen h1 {
+  font-size: 64px; letter-spacing: 4px; margin: 6px 0 2px; color: #ffd9a0;
+  text-shadow: 0 0 26px rgba(255,140,50,.65), 0 3px 0 #5c2408;
+}
+.screen h2 { font-size: 40px; margin: 4px 0; color: #ffd9a0; }
+.tagline { font-size: 19px; color: #d9c9a8; margin: 2px 0 14px; font-style: italic; }
+.ember-row { display: flex; gap: 16px; margin: 8px 0 4px; }
+.ember-row svg { filter: drop-shadow(0 0 9px currentColor); }
+.howto {
+  background: rgba(20,12,34,.88); border: 2px solid #6b543a; border-radius: 14px;
+  max-width: 660px; padding: 14px 22px; text-align: left; font-size: 15.5px; line-height: 1.5;
+}
+.howto h3 { margin: 2px 0 8px; color: #ffd9a0; font-size: 18px; }
+.howto p { margin: 5px 0; }
+.big-btn {
+  margin-top: 18px; font-size: 23px; padding: 13px 42px; border-radius: 999px;
+  background: linear-gradient(180deg, #ffb347, #e0641e); color: #2a1200; font-weight: bold;
+  border: 2px solid #ffd9a0; box-shadow: 0 0 22px rgba(255,140,50,.55);
+}
+.big-btn:hover { transform: scale(1.05); }
+.result-flame { font-size: 74px; line-height: 1; }
+.score-line { font-size: 20px; color: #ffe9bd; }
+
+/* ---------- duel layout ---------- */
+.topbar {
+  display: flex; align-items: center; gap: 14px; padding: 6px 14px;
+  background: #120c1e; border-bottom: 2px solid #6b543a;
+}
+.topbar .game-name { font-size: 19px; color: #ffd9a0; letter-spacing: 2px; font-weight: bold; }
+.turn-banner {
+  flex: 1; text-align: center; font-size: 18px; color: #ffe9bd;
+  text-shadow: 0 0 10px rgba(255,180,80,.5);
+}
+.icon-btn { background: #2c1e44; color: #f3e9d2; border: 1.5px solid #6b543a; border-radius: 9px; font-size: 16px; padding: 5px 12px; }
+.table {
+  flex: 1; display: flex; flex-direction: column; min-height: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(80,50,20,.35), transparent 75%),
+    linear-gradient(180deg, #241533 0%, #2e1a20 50%, #241533 100%);
+  padding: 6px 14px;
+}
+.zone { display: flex; align-items: center; gap: 14px; min-height: 0; }
+.board-row {
+  flex: 1; display: flex; gap: 10px; align-items: center; justify-content: center;
+  min-height: 138px; padding: 4px; border-radius: 14px;
+}
+.board-row.targetable { outline: 2px dashed rgba(255,217,160,.0); }
+.empty-note { color: #9b8a6d; font-style: italic; font-size: 15px; }
+.hero-panel {
+  width: 168px; flex: none; text-align: center; background: rgba(14,8,26,.85);
+  border: 2.5px solid #6b543a; border-radius: 14px; padding: 5px 6px;
+}
+.life { font-size: 22px; }
+.hero-panel.foe { border-color: #7a3b2e; }
+.hero-panel.me { border-color: #3f6d4e; }
+.hero-panel.targetable { outline: 3px solid #ffd76a; cursor: pointer; animation: pulse 1s infinite; }
+.hero-panel.shake { animation: shake .4s; }
+.portrait { margin: 0 auto 2px; }
+.hero-name { font-size: 16.5px; font-weight: bold; color: #ffe9bd; }
+.life { font-size: 25px; font-weight: bold; color: #ff8f7a; }
+.life.good { color: #9fe870; }
+.embers { font-size: 16px; color: #ffc46a; letter-spacing: 1px; min-height: 20px; }
+.deck-note { font-size: 13px; color: #b7a888; }
+@keyframes pulse { 0%,100% { outline-offset: 0; } 50% { outline-offset: 3px; } }
+@keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.midline { display: flex; align-items: center; gap: 12px; padding: 2px 4px; }
+.midline .rule { flex: 1; height: 2px; background: linear-gradient(90deg, transparent, #8a6a44, transparent); }
+.vs { color: #ffd9a0; font-weight: bold; letter-spacing: 3px; }
+.bottom-zone { display: flex; gap: 14px; align-items: stretch; }
+.hand-area { flex: 1; display: flex; flex-direction: column; }
+.hand-row { display: flex; gap: 9px; justify-content: center; align-items: flex-end; min-height: 182px; }
+.side-stack { width: 168px; flex: none; display: flex; flex-direction: column; gap: 8px; }
+.end-btn {
+  font-size: 20px; padding: 12px 10px; border-radius: 12px; font-weight: bold;
+  background: linear-gradient(180deg, #ffb347, #e0641e); color: #2a1200; border: 2px solid #ffd9a0;
+}
+.end-btn:disabled { filter: grayscale(.8); opacity: .55; cursor: default; }
+.log {
+  background: rgba(10,6,20,.9); border: 1.5px solid #55452e; border-radius: 10px;
+  font-size: 12.8px; line-height: 1.45; padding: 6px 10px; height: 62px; overflow-y: auto; color: #d9c9a8;
+  margin-top: 6px;
+}
+.log .bond-line { color: #ffd76a; font-weight: bold; }
+.log .intent-line { color: #c99aff; font-style: italic; }
+.hint { text-align: center; font-size: 14.5px; color: #ffe9bd; min-height: 20px; padding-top: 3px; }
+.foe-hand { display: flex; gap: 5px; justify-content: center; min-height: 64px; align-items: center; }
